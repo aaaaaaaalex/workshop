@@ -3,14 +3,14 @@
 We will first configure Loadbalancer IPAM according
 to the [Calico documentation](https://docs.tigera.io/calico/latest/networking/ipam/service-loadbalancer)
 
+
 ## Verify Calico LoadBalancer controller is enabled
 
 Check the Calico `kubecontrollersconfiguration` resource
 to verify the LoadBalancer controller is activated.
 
 We must ensure that: `kubecontrollersconfiguration/default.spec.controllers.loadBalancer.assignIPs`
-has the value: `AllServices`. If it does not, we must
-set it accordingly.
+has the value: `AllServices`.
 
 ```sh
 kubectl get kubecontrollersconfiguration default -o yaml
@@ -78,3 +78,11 @@ http-server   LoadBalancer   10.102.43.188   192.210.123.0   80:32462/TCP   11s
 
 The external IP `192.210.123.0` is within the expected CIDR, so
 IPAM is working as expected.
+
+## Set an env-var in your shell to store the service IP
+
+Remember to add your own service's external IP here, if it differs from mine:
+
+```sh
+service_ip=192.210.123.0
+```
