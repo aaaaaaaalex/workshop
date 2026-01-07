@@ -2,3 +2,4 @@
 external_key
 *.pem
 *.key
+*.pub
