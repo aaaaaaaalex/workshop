@@ -1,0 +1,9 @@
+rm -f out
+mkfifo out
+(while true; do date >> out; sleep 2; done)&
+PID=$!
+
+tail -f out | nc $service_ip 80
+
+kill $PID
+rm out
